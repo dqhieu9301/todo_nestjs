@@ -8,6 +8,7 @@ import { IUser } from 'src/user/interface/interface';
 import { IStatus } from 'src/todo/interface/interface';
 import * as bcrypt from 'bcrypt';
 import { Token } from '../entity/token.entity';
+import { Role } from './role/role.decorator';
 
 @Injectable()
 export class AuthService {
@@ -27,7 +28,7 @@ export class AuthService {
 
     const saltOrRounds = 10;
     const hashPassword = await bcrypt.hash(password, saltOrRounds);
-    await this.userRepository.save({ username: username, password: hashPassword });
+    await this.userRepository.save({ username: username, password: hashPassword, role: 2 });
     return status;
   }
   
@@ -42,7 +43,7 @@ export class AuthService {
       throw new BadRequestException("Wrong password");
     }
 
-    const payload = { username: user.username, id: user.id };
+    const payload = { username: user.username, id: user.id, role: Role.USER };
     const accessToken = await this.jwtService.signAsync(payload, { secret: process.env.SECRET_KEY, expiresIn: expiresAccessToken });
     const refreshToken = await this.jwtService.signAsync(payload, { secret: process.env.REFRESH_SECRET_KEY, expiresIn: expiresRefreshToken });
     

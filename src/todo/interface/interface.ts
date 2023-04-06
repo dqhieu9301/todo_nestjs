@@ -5,6 +5,8 @@ export interface ITodo {
     dateStart: Date
     dateEnd: Date
     isStatus: boolean
+    isDelete?: boolean,
+    idUser: number
 }
 
 export interface IStatus {

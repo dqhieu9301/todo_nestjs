@@ -1,7 +1,7 @@
-import { IsNotEmpty, IsString, IsDateString, IsBoolean } from "class-validator";
+import { IsNotEmpty, IsString, IsDateString, IsBoolean, IsNumber } from "class-validator";
 
 
-export class TodoDTO {
+export class TodoUpdateDTO {
 
     @IsNotEmpty()
     @IsString()
@@ -18,5 +18,9 @@ export class TodoDTO {
     @IsNotEmpty()
     @IsBoolean()
       isStatus: boolean;
+
+    @IsNotEmpty()
+    @IsNumber()
+      idUser: number;
     
 }

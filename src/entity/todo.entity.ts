@@ -14,6 +14,12 @@ export class Todo {
   @Column()
     dateEnd: Date;
 
+  @Column()
+    idUser: number;  
+
   @Column({ default: true })
     isStatus: boolean;
+
+  @Column({ default: false })
+    isDelete: boolean;
 }
